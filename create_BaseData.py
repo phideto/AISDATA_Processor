@@ -41,6 +41,21 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
                         cog = row[13]
                         heading = row[14]
 
+                        if 0.0 > sog or sog > 50.0:
+                            continue
+
+                        if 34.685767 > lat or lat > 36.380717:
+                            continue
+
+                        if 139.44318 > lon or lon > 140.62573:
+                            continue
+
+                        if 0.0 > cog or cog > 360.0:
+                            continue
+
+                        if 0 > heading or heading > 360:
+                            continue
+
                         os.makedirs(BASEDATA_FILE_PATH + '/' + date, exist_ok=True)
 
                         with open(BASEDATA_FILE_PATH + '/' + date + '/BaseData_' + date + '_' + mmsi + '.csv', 'a', newline='') as f:
