@@ -41,19 +41,19 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
                         cog = row[13]
                         heading = row[14]
 
-                        if 0.0 > sog or sog > 50.0:
+                        if 0.0 > float(sog) or float(sog) > 50.0:
                             continue
 
-                        if 34.685767 > lat or lat > 36.380717:
+                        if 34.685767 > float(lat) or float(lat) > 36.380717:
                             continue
 
-                        if 139.44318 > lon or lon > 140.62573:
+                        if 139.44318 > float(lon) or float(lon) > 140.62573:
                             continue
 
-                        if 0.0 > cog or cog > 360.0:
+                        if 0.0 > float(cog) or float(cog) > 360.0:
                             continue
 
-                        if 0 > heading or heading > 360:
+                        if 0 > int(heading) or int(heading) > 360:
                             continue
 
                         os.makedirs(BASEDATA_FILE_PATH + '/' + date, exist_ok=True)
