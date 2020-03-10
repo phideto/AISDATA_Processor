@@ -57,7 +57,7 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
                         if 0.0 > float(cog) or float(cog) > 360.0:
                             continue
 
-                        if 0 > int(heading) or int(heading) > 360:
+                        if 0 > float(heading) or float(heading) > 360:
                             continue
 
                         os.makedirs(BASEDATA_FILE_PATH + '/' + date, exist_ok=True)
