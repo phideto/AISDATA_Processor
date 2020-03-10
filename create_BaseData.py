@@ -41,6 +41,9 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
                         cog = row[13]
                         heading = row[14]
 
+                        if len(mmsi) != 9:
+                            continue
+
                         if 0.0 > float(sog) or float(sog) > 50.0:
                             continue
 
