@@ -27,6 +27,7 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
     for path_aisdata in path_aisdata_list:
         with zipfile.ZipFile(path_aisdata) as zip_file:
             for path_csv_file in zip_file.namelist():
+                print("Loading " + path_csv_file)
                 with zip_file.open(path_csv_file, 'r') as csv_file:
                     reader = csv.reader(TextIOWrapper(csv_file, 'shift_jis'))
 

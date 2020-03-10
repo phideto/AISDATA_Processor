@@ -20,7 +20,19 @@ os.makedirs(STATICLIST_FILE_PATH, exist_ok=True)
 
 #データ処理の実行
 create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH)
+print("############################\n"
+    "### done create_BaseData ###\n"
+    "############################")
 create_MMSIList(BASEDATA_FILE_PATH, MMSILIST_FILE_PATH)
+print("############################\n"
+    "### done create_MMSIList ###\n"
+    "############################")
 create_InterpolationData(BASEDATA_FILE_PATH, INTERPOLATIONDATA_FILE_PATH)
+print("#####################################\n"
+    "### done create_InterpolationData ###\n"
+    "#####################################")
 create_StaticList(AISDATA_FILE_PATH, STATICLIST_FILE_PATH)
+print("##############################\n"
+    "### done create_StaticList ###\n"
+    "##############################")
  

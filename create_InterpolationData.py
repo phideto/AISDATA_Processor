@@ -25,6 +25,7 @@ def create_InterpolationData(BASEDATA_FILE_PATH, INTERPOLATIONDATA_FILE_PATH):
         date = path_BaseData[-22:-14]
 
         with open(path_BaseData, 'r') as basedata:
+            print("Loading " + path_BaseData)
             reader = csv.reader(basedata)
 
             os.makedirs(INTERPOLATIONDATA_FILE_PATH + '/' + date, exist_ok=True)
