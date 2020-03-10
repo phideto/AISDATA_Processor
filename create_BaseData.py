@@ -22,12 +22,12 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
         BaseDataファイルを出力するフォルダのパス。
     """
     ##### BaseDataを作る #####
+    print("Now : create BaseData")
     path_aisdata_list = glob.glob(AISDATA_FILE_PATH + '/*/*_[1-3].zip') #メッセージ番号1-3のみを抽出
 
     for path_aisdata in path_aisdata_list:
         with zipfile.ZipFile(path_aisdata) as zip_file:
             for path_csv_file in zip_file.namelist():
-                print("Loading " + path_csv_file)
                 with zip_file.open(path_csv_file, 'r') as csv_file:
                     reader = csv.reader(TextIOWrapper(csv_file, 'shift_jis'))
 
@@ -66,10 +66,14 @@ def create_BaseData(AISDATA_FILE_PATH, BASEDATA_FILE_PATH):
                             writer = csv.writer(f, delimiter=',')
                             writer.writerow([mmsi, date, time, sog, lat, lon, cog, heading])
 
+    print("Done : create BaseData")
     ##### BaseDataを時間でソートする #####
+    print("Now : sort BaseData")
     path_BaseData_list = glob.glob(BASEDATA_FILE_PATH + '/' + date + '/*/BaseData_*.csv')
 
     for path_BaseData in path_BaseData_list:
         df = pd.read_csv(path_BaseData, header=None)
         df = df.sort_values([2])
         df.to_csv(path_BaseData, header=False, index=False)
+    
+    print("Done : sort BaseData")

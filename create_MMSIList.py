@@ -14,6 +14,8 @@ def create_MMSIList(BASEDATA_FILE_PATH, MMSILIST_FILE_PATH):
     MMSILIST_FILE_PATH : str
         MMSIListファイルを出力するフォルダのパス。
     """
+    print("Now : create MMSIList")
+
     path_BaseData_list = glob.glob(BASEDATA_FILE_PATH + '/*/BaseData_*.csv')
 
     for path_BaseData in path_BaseData_list:
@@ -25,3 +27,5 @@ def create_MMSIList(BASEDATA_FILE_PATH, MMSILIST_FILE_PATH):
         with open(MMSILIST_FILE_PATH + '/' + date + '/MMSIList_' + date + '.csv', 'a', newline='') as f:
             writer = csv.writer(f, delimiter=',')
             writer.writerow([mmsi])
+    
+    print("Done : create MMSIList")

@@ -23,12 +23,13 @@ def create_StaticList(AISDATA_FILE_PATH, STATICLIST_FILE_PATH):
         StaticListファイルを出力するフォルダのパス。
     """
     ##### StaticListを作る #####
+    print("Now : create StaticList")
+
     path_aisdata_list = glob.glob(AISDATA_FILE_PATH + '/*/*_5.zip') #メッセージ番号1-3のみを抽出
 
     for path_aisdata in path_aisdata_list:
         with zipfile.ZipFile(path_aisdata) as zip_file:
             for path_csv_file in zip_file.namelist():
-                print("Loading " + path_csv_file)
                 with zip_file.open(path_csv_file, 'r') as csv_file:
                     reader = csv.reader(TextIOWrapper(csv_file, 'shift_jis'))
 
@@ -48,7 +49,9 @@ def create_StaticList(AISDATA_FILE_PATH, STATICLIST_FILE_PATH):
                             writer = csv.writer(f, delimiter=',')
                             writer.writerow([mmsi, length, width, ship_type, draught])
 
+    print("Done : create StaticData")
     ##### StaticListの重複を削除し、MMSI番号でソートする #####
+    print("Now : delete duplication and sort")
     path_StaticList_list = glob.glob(STATICLIST_FILE_PATH + '/*/StaticList_*.csv')
 
     for path_StaticList in path_StaticList_list:
@@ -56,3 +59,5 @@ def create_StaticList(AISDATA_FILE_PATH, STATICLIST_FILE_PATH):
         df = df[~df[0].duplicated()]
         df = df.sort_values([0])
         df.to_csv(path_StaticList, header=False, index=False)
+    
+    print("Done : delete duplication and sort")

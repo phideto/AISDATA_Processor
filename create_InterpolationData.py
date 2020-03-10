@@ -17,6 +17,8 @@ def create_InterpolationData(BASEDATA_FILE_PATH, INTERPOLATIONDATA_FILE_PATH):
     INTERPOLATIONDATA_FILE_PATH : str
         InterpolationDataファイルを出力するフォルダのパス。
     """
+    print("Now : create InterpolationData")
+
     path_BaseData_list = glob.glob(BASEDATA_FILE_PATH + '/*/BaseData_*.csv')
 
     ##### 時間を補完したデータを作成 #####
@@ -25,7 +27,6 @@ def create_InterpolationData(BASEDATA_FILE_PATH, INTERPOLATIONDATA_FILE_PATH):
         date = path_BaseData[-22:-14]
 
         with open(path_BaseData, 'r') as basedata:
-            print("Loading " + path_BaseData)
             reader = csv.reader(basedata)
 
             os.makedirs(INTERPOLATIONDATA_FILE_PATH + '/' + date, exist_ok=True)
@@ -53,10 +54,14 @@ def create_InterpolationData(BASEDATA_FILE_PATH, INTERPOLATIONDATA_FILE_PATH):
                     writer.writerow(row)
                     pre_time = time
                 
+    print("Done : create InterpolationData")
     ##### 線形補間の処理 #####
+    print("Now : interpolate data")
     path_InterpolationData_list = glob.glob(INTERPOLATIONDATA_FILE_PATH + '/*/InterpolationData_*.csv')
 
     for path_InterpolationData in path_InterpolationData_list:
         df = pd.read_csv(path_InterpolationData, header=None)
         df = df.interpolate()
         df.to_csv(path_InterpolationData, header=False, index=False)
+    
+    print("Done : interpolate data")
